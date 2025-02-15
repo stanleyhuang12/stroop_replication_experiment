@@ -63,20 +63,34 @@
         },
         randomize_order: true
  
-    };
+    }
 
     main_timeline.push(stroop_experiment)
 
+
+    
     const save_data_trial  = {
         type: jsPsychPipe,
         action: "save",
         experiment_id: "mWssBhusicbe",
-        filename: filename,
+        filename: "stroop_experiment",
         data_string: ()=>jsPsych.data.get().csv(),
         on_finish: function(data){alert(data.result.message)}
-      };
+    };
+    
 
     main_timeline.push(save_data_trial)
+    
+    const final_trial = { 
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "Congratulations! You finished the experiment. Click any keyboard values to save the information.",
+        choices: "ALL_KEYS"
+    }
+    
+    main_timeline.push(final_trial)
+
+
+    
     
     jsPsych.run(main_timeline)
 
